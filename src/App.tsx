@@ -27,6 +27,10 @@ enum UUIDCharacteristic {
   Event = "00050003-0000-1000-0000-d8492fffa821"
 }
 
+function delay(time: number) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
 const App: React.FC = () => {
   const [device, setDevice] = useState<BluetoothDevice | null>(null);
 
@@ -72,6 +76,10 @@ const App: React.FC = () => {
       if (service) {
         const characteristic = await service.getCharacteristic(UUIDCharacteristic.Event);
         await characteristic.writeValue(data);
+        await delay(200);
+        console.log("setting back to imediate")
+        await characteristic.writeValue(new Uint8Array([mode]));
+        console.log("try again")
       }
     }
   };
