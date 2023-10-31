@@ -36,18 +36,6 @@ const App: React.FC = () => {
 
   const initializeBluetooth = async () => {
     try {
-      // console.log('Getting existing permitted Bluetooth devices...');
-      // navigator.bluetooth.getDevices()
-      // .then(devices => {
-      //   console.log('> Got ' + devices.length + ' Bluetooth devices.');
-      //   for (const device of devices) {
-      //     console.log('  > ' + device.name + ' (' + device.id + ')');
-      //   }
-      // })
-      // .catch(error => {
-      //   console.log('Argh! ' + error);
-      // });
-
       const btDevice = await navigator.bluetooth.requestDevice({
         filters: [{ services: [UUIDCharacteristic.CANON_BLUETOOTH_REMOTE_SERVICE] }],
         optionalServices: [UUIDCharacteristic.Pairing, UUIDCharacteristic.Event]
@@ -84,12 +72,32 @@ const App: React.FC = () => {
     }
   };
 
+  const sendButtonRelease = async () => {
+    sendState(Mode.Immediate, Button.Release);
+  };
+
+  const sendButtonFocus = async () => {
+    sendState(Mode.Immediate, Button.Focus);
+  };
+
+  const sendButtonTele = async () => {
+    sendState(Mode.Immediate, Button.Tele);
+  };
+
+  const sendButtonWide = async () => {
+    sendState(Mode.Immediate, Button.Wide);
+  };
+
   return (
     <div>
       <p>Bluetooth Device: {device ? device.name : 'Not connected'}</p>
       <button onClick={initializeBluetooth}>Initialize Bluetooth</button>
-      <button onClick={() => sendState(Mode.Immediate)}>Send Event</button>
+      <button onClick={sendButtonRelease}>Send Button Release</button>
+      <button onClick={sendButtonFocus}>Send Button Focus</button>
+      <button onClick={sendButtonTele}>Send Button Tele</button>
+      <button onClick={sendButtonWide}>Send Button Wide</button>
     </div>
   );
 };
+
 export default App;
