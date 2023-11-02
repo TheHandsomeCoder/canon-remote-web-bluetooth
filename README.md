@@ -11,5 +11,6 @@ Related Project linkts
 * https://github.com/pklaus/canoremote/tree/main
 * https://github.com/ArthurFDLR/BR-M5
 * https://awa.scumm.it/posts/category/subcategory/2021/12/01/CRC/
+* https://github.com/emanuelelaface/cameraremotecontrol
 
 
